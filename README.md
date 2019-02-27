@@ -22,10 +22,12 @@ In order to upload a deb file to `bintray` use `upload-to-bintray.sh`. This requ
 
 Each package, structured as a subdirectory in `debs`, has the following content:
 
+```
     .
     ├── deb-root		# This is the workspace of the debian package generator.
     │   └── debian		# Debian package metadata. See [debian manual](https://www.debian.org/doc/manuals/maint-guide/dreq.en.html) for more info.
     └── src			# Package's source directory - usually a git submodule.
+```
 
 In order to upgrade a package
 
