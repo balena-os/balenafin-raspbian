@@ -3,6 +3,7 @@
 set -e
 
 SCRIPTNAME="$(basename "$0")"
+REBOOT=0
 
 # Log function helper
 function log {
