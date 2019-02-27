@@ -1,5 +1,7 @@
 # balenaFin Raspbian support packages and tools
 
+![balenaFin](https://raw.githubusercontent.com/balena-os/balenafin-raspbian/master/balenafin-raspbian.png "balenaFin")
+
 This repository includes metadata and tools for generating and maintaining [balenaFin](https://balenafin.io) specific Debian packages.
 The Debian repository is available on [bintray](https://bintray.com) at [balenaos/raspbian](https://bintray.com/balenaos/raspbian).
 
