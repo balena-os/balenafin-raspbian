@@ -1,0 +1,15 @@
+Source: balenafin-firmware
+Section: misc
+Priority: extra
+Maintainer: Andrei Gherzan <andrei@balena.io>
+Build-Depends: debhelper (>= 10),device-tree-compiler
+Standards-Version: 4.1.2
+Homepage: https://www.balena.io/fin/
+
+Package: balenafin-firmware
+Architecture: armel armhf
+Depends: ${misc:Depends}
+Recommends: raspberrypi-kernel,raspberrypi-firmware
+Description: balenaFin firmware
+ This package contains firmware files for balenaFin.
+

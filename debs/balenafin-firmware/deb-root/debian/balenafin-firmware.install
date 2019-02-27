@@ -1,0 +1,2 @@
+boot/dt-blob.bin
+boot/overlays/balena-fin-updated.dtbo

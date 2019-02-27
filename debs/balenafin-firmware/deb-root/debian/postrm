@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+CONFIG=/boot/config.txt
+
+sed -i '/dtoverlay=balena-fin-updated/d' "$CONFIG"

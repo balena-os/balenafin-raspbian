@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+CONFIG=/boot/config.txt
+
+if ! grep -q "dtoverlay=balena-fin-updated" "$CONFIG"; then
+	echo "Setting temporary balena-fin dtb overlay while we wait for upstream update."
+	echo "dtoverlay=balena-fin-updated" >> "$CONFIG"
+fi
