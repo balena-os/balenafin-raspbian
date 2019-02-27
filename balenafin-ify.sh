@@ -67,10 +67,10 @@ log "Adding balenafin raspbian repository..."
 echo "deb https://dl.bintray.com/balenaos/raspbian stretch main" > /etc/apt/sources.list.d/balenafin.list
 
 log "Installing required packages..."
-apt-get install apt-transport-https
-apt-get update
-apt-get upgrade
-apt-get install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl
+apt-get -y install apt-transport-https
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl
 
 log "Done. Enjoy your balenaFin!"
 if [ "$REBOOT" -eq 1 ]; then
