@@ -63,7 +63,7 @@ fi
 log "Importing bintray gpg key..."
 curl -fsSL 'https://bintray.com/user/downloadSubjectPublicKey?username=bintray' | apt-key add -
 
-log "Adding balenafin raspbian repository..."
+log "Adding balenaFin Raspbian repository..."
 echo "deb https://dl.bintray.com/balenaos/raspbian stretch main" > /etc/apt/sources.list.d/balenafin.list
 
 log "Installing required packages..."
@@ -72,7 +72,7 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl
 
-log "Done. Enjoy your balenaFin!"
+log "Done. Enjoy your balenaFin board!"
 if [ "$REBOOT" -eq 1 ]; then
 	log WARN "Reboot was requested through arguments. Rebooting in 10 seconds..."
 	sleep 10
