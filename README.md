@@ -1,5 +1,8 @@
 # balenaFin Raspbian support packages and tools
 
+* [ ![Download](https://api.bintray.com/packages/balenaos/raspbian/sd8887-mrvl/images/download.svg) ](https://bintray.com/balenaos/raspbian/sd8887-mrvl/_latestVersion) sd8887-mrvl 
+* [ ![Download](https://api.bintray.com/packages/balenaos/raspbian/balenafin-firmware/images/download.svg) ](https://bintray.com/balenaos/raspbian/balenafin-firmware/_latestVersion) balenafin-firmware 
+
 ![balenaFin](https://raw.githubusercontent.com/balena-os/balenafin-raspbian/master/balenafin-raspbian.png "balenaFin")
 
 This repository includes metadata and tools for generating and maintaining [balenaFin](https://balenafin.io) specific Debian packages.
