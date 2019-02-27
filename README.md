@@ -39,6 +39,10 @@ In order to upgrade a package
 * Regenerate the deb as per above instructions.
 * Upload the new deb as per above instructions.
 
+## Run Raspbian image with balenaFin support
+
+If you are running a pristine Raspbian image, you can install and configure it to support balenaFin by taking advantage of the `balenafin-ify.sh` tool. This script is meant to run on target (on a balenaFin board). It will configure the OS and download all the needed packages. Check the tool's help message for more info.
+
 ## License
 
 Copyright 2019 Rulemotion Ltd.
