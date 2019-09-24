@@ -1,3 +1,10 @@
+sd8887-mrvl (0.0.4-1) unstable; urgency=low
+
+  * Initialize station_info struct
+  * Add release 15.68.19.p22 for wlan and 15.26.19.p22 for bt
+
+ -- Giovanni Garufi <giovanni@balena.io>  Tue, 24 Sep 2019 13:07:58 +0100
+
 sd8887-mrvl (0.0.2-1) unstable; urgency=low
 
   * Initial release
