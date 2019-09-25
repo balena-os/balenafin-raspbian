@@ -68,10 +68,10 @@ log "Building $PACKAGE debian package..."
 docker build -t balenafin-raspbian .
 docker rm -f balenafin-raspbian-container &> /dev/null
 docker run --rm --user "$(id -u):$(id -g)" \
-	-v "$SCRIPTPATH:/raspbian-builder" \
+	-v "$SCRIPTPATH:/balenafin-raspbian" \
 	--name balenafin-raspbian-container \
-	raspbian-builder \
-	/raspbian-builder/gen-deb.sh "$PACKAGE"
+	balenafin-raspbian \
+	/balenafin-raspbian/gen-deb.sh "$PACKAGE"
 
 if [ "$?" -eq 0 ]; then
 	log "Debian package generated for $PACKAGE:"

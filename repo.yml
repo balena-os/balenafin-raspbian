@@ -1,0 +1,4 @@
+type: 'generic'
+upstream:
+  repo: 'sd8887'
+  url: 'https://github.com/balena-io/sd8887-mrvl' 
