@@ -1,9 +1,9 @@
 Source: sd8887-mrvl
 Section: kernel
 Priority: extra
-Maintainer: Andrei Gherzan <andrei@balena.io>
+Maintainer: Alex Gonzalez <alexg@balena.io>
 Build-Depends: debhelper (>= 10), dkms
-Standards-Version: 4.2.0
+Standards-Version: 4.4.1
 Homepage: https://www.marvell.com
 Vcs-Browser: https://github.com/balena-io/sd8887-mrvl
 Vcs-Git: https://github.com/balena-io/sd8887-mrvl.git
