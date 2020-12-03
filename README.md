@@ -14,6 +14,8 @@ The packages supported are structured as subdirectories in `debs`. In order to g
 
 For example, running `./gen-deb-container.sh --package FOO`, will generate the deb package (and additional artefacts) in `debs/FOO/`.
 
+For packaging modules-only kernel drivers, run `./gen-deb-container.sh --package FOO -m`. This will create a binary package with the \*.ko modules and no source.
+
 ## Upload to bintray
 
 In order to upload a deb file to `bintray` use `upload-to-bintray.sh`. This requires an API key passed to the tool.
@@ -42,6 +44,8 @@ In order to upgrade a package
 ## Run Raspbian image with balenaFin support
 
 If you are running a pristine Raspbian image, you can install and configure it to support balenaFin by taking advantage of the `balenafin-ify.sh` tool. This script is meant to run on target (on a balenaFin board). It will configure the OS and download all the needed packages. Check the tool's help message for more info.
+
+bash <(curl -L https://raw.githubusercontent.com/balena-os/balenafin-raspbian/master/balenafin-ify.sh)
 
 ## License
 
