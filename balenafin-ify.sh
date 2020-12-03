@@ -37,7 +37,7 @@ Options:
         -h, --help
                 Display this help and exit.
         -r, --reboot
-                The Debian package to upload. Required.
+                Reboot the device after the update.
 EOF
 }
 
@@ -72,8 +72,14 @@ echo "deb https://dl.bintray.com/balenaos/raspbian ${DISTRO} main" > /etc/apt/so
 log "Installing required packages..."
 apt-get -y install apt-transport-https
 apt-get -y update
-apt-get -y upgrade
-apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl
+apt-get -y full-upgrade
+apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl-firmware
+for fl in /usr/src/linux-headers-*; do
+	lh=$(basename "${fl}")
+	kv="${lh#"linux-headers-"}"
+	apt-get -y install sd8887-mrvl-modules-"${kv}"
+	depmod -a "${kv}"
+done
 
 log "Done. Enjoy your balenaFin board!"
 if [ "$REBOOT" -eq 1 ]; then
