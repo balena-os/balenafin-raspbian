@@ -48,7 +48,7 @@ while [[ $# -ge 1 ]]; do
             help
             exit 0
             ;;
-        -f|--debfile)
+        -d|--debfile)
             if [ -z "$2" ]; then
                 log ERROR "\"$1\" argument needs a value."
             fi
