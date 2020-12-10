@@ -35,9 +35,12 @@ Options:
 		Package name.
 	-m, --modules-only
 		Module only package.
+	-n, --no-cache
+		Do not use docker cache.
 EOF
 }
 
+no_cache=""
 # Parse arguments
 while [[ $# -ge 1 ]]; do
     i="$1"
@@ -56,6 +59,9 @@ while [[ $# -ge 1 ]]; do
         -m|--modules-only)
 	    modules_only=true
             ;;
+        -n|--no-cache)
+	    no_cache="--no-cache"
+            ;;
         *)
             log ERROR "Unrecognized option $1."
             ;;
@@ -72,7 +78,7 @@ SCRIPTNAME="$(basename $0)"
 
 
 log "Building $PACKAGE debian package..."
-docker build -t balenafin-raspbian --build-arg DISTRO=${DISTRO} --build-arg UID=$(id -u ${USER}) .
+docker build ${no_cache} -t balenafin-raspbian --build-arg DISTRO=${DISTRO} --build-arg UID=$(id -u ${USER}) .
 docker rm -f balenafin-raspbian-container &> /dev/null
 docker run --rm \
 	-v "$SCRIPTPATH:/balenafin-raspbian" \
