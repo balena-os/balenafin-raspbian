@@ -33,6 +33,8 @@ Options:
 		Display this help and exit.
 	-p, --package
 		Package name.
+	-m, --modules-only
+		Module only package.
 EOF
 }
 
@@ -50,6 +52,9 @@ while [[ $# -ge 1 ]]; do
             fi
             PACKAGE="$2"
             shift
+            ;;
+        -m|--modules-only)
+	    modules_only=true
             ;;
         *)
             log ERROR "Unrecognized option $1."
@@ -69,15 +74,16 @@ SCRIPTNAME="$(basename $0)"
 log "Building $PACKAGE debian package..."
 docker build -t balenafin-raspbian --build-arg DISTRO=${DISTRO} --build-arg UID=$(id -u ${USER}) .
 docker rm -f balenafin-raspbian-container &> /dev/null
-docker run --rm --user "$(id -u):$(id -g)" \
+docker run --rm \
 	-v "$SCRIPTPATH:/balenafin-raspbian" \
 	--name balenafin-raspbian-container \
+	-e MODULES_ONLY=${modules_only} \
 	balenafin-raspbian \
 	/balenafin-raspbian/gen-deb.sh "$PACKAGE"
 
 if [ "$?" -eq 0 ]; then
-	log "Debian package generated for $PACKAGE:"
-	ls -al $SCRIPTPATH/debs/$PACKAGE/$PACKAGE*
+	log "Debian packages generated for $PACKAGE:"
+	ls -al "$SCRIPTPATH/debs/$PACKAGE/$PACKAGE"*
 else
 	log ERROR "Debian package failed to get generated. See above for logs."
 fi
