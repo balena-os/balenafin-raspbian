@@ -2,6 +2,8 @@
 
 set -e
 
+DISTRO=$(grep VERSION_CODENAME < /etc/os-release | cut -d "=" -f2)
+
 SCRIPTNAME="$(basename "$0")"
 REBOOT=0
 
@@ -65,7 +67,7 @@ log "Importing bintray gpg key..."
 curl -fsSL 'https://bintray.com/user/downloadSubjectPublicKey?username=bintray' | apt-key add -
 
 log "Adding balenaFin Raspbian repository..."
-echo "deb https://dl.bintray.com/balenaos/raspbian stretch main" > /etc/apt/sources.list.d/balenafin.list
+echo "deb https://dl.bintray.com/balenaos/raspbian ${DISTRO} main" > /etc/apt/sources.list.d/balenafin.list
 
 log "Installing required packages..."
 apt-get -y install apt-transport-https

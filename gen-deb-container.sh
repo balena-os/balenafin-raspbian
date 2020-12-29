@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source distro-config.inc
+
 # Log function helper
 function log {
     # Address log levels
@@ -65,7 +67,7 @@ SCRIPTNAME="$(basename $0)"
 
 
 log "Building $PACKAGE debian package..."
-docker build -t balenafin-raspbian .
+docker build -t balenafin-raspbian --build-arg DISTRO=${DISTRO} --build-arg UID=$(id -u ${USER}) .
 docker rm -f balenafin-raspbian-container &> /dev/null
 docker run --rm --user "$(id -u):$(id -g)" \
 	-v "$SCRIPTPATH:/balenafin-raspbian" \

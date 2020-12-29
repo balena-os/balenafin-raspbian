@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source distro-config.inc
+
 SCRIPTNAME="$(basename "$0")"
 
 # Log function helper
@@ -79,7 +81,6 @@ PACKAGE="$(basename "$DEB" |  sed 's/.deb//g' | cut -d '_' -f1)"
 VER="$(basename "$DEB" |  sed 's/.deb//g' | cut -d '_' -f2)"
 ARCH="$(basename "$DEB" |  sed 's/.deb//g' | cut -d '_' -f3)"
 
-DISTRO=stretch
 COMPONENT=main
 
 log "Pushing $DEB to bintray..."
