@@ -2,6 +2,8 @@
 
 set -e
 
+DISTRO=$(grep VERSION_CODENAME < /etc/os-release | cut -d "=" -f2)
+
 SCRIPTNAME="$(basename "$0")"
 REBOOT=0
 
@@ -35,7 +37,7 @@ Options:
         -h, --help
                 Display this help and exit.
         -r, --reboot
-                The Debian package to upload. Required.
+                Reboot the device after the update.
 EOF
 }
 
@@ -65,13 +67,19 @@ log "Importing bintray gpg key..."
 curl -fsSL 'https://bintray.com/user/downloadSubjectPublicKey?username=bintray' | apt-key add -
 
 log "Adding balenaFin Raspbian repository..."
-echo "deb https://dl.bintray.com/balenaos/raspbian stretch main" > /etc/apt/sources.list.d/balenafin.list
+echo "deb https://dl.bintray.com/balenaos/raspbian ${DISTRO} main" > /etc/apt/sources.list.d/balenafin.list
 
 log "Installing required packages..."
-apt-get -y install apt-transport-https
 apt-get -y update
-apt-get -y upgrade
-apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl
+apt-get -y install apt-transport-https
+apt-get -y full-upgrade
+apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl-firmware
+for fl in /usr/src/linux-headers-*; do
+	lh=$(basename "${fl}")
+	kv="${lh#"linux-headers-"}"
+	apt-get -y install sd8887-mrvl-modules-"${kv}"
+	depmod -a "${kv}"
+done
 
 log "Done. Enjoy your balenaFin board!"
 if [ "$REBOOT" -eq 1 ]; then

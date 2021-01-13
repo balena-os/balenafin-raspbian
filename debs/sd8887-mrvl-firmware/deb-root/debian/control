@@ -1,4 +1,4 @@
-Source: sd8887-mrvl
+Source: sd8887-mrvl-firmware
 Section: kernel
 Priority: extra
 Maintainer: Alex Gonzalez <alexg@balena.io>
@@ -8,8 +8,8 @@ Homepage: https://www.marvell.com
 Vcs-Browser: https://github.com/balena-io/sd8887-mrvl
 Vcs-Git: https://github.com/balena-io/sd8887-mrvl.git
 
-Package: sd8887-mrvl
+Package: sd8887-mrvl-firmware
 Architecture: all
-Depends: ${misc:Depends}, bc
-Description: Marvel SD8887 drivers and firmware
- Marvel SD8887 drivers and firmware
+Depends: ${misc:Depends}
+Description: Marvel SD8887 firmware files
+ Marvel SD8887 firmware

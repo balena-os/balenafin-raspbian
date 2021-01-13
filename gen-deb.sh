@@ -22,6 +22,17 @@ function log {
     fi                                                                                                                                             
 }
 
+function remove_dependencies {
+	pkg="$1"
+	tmpdir=$(mktemp -d)
+	mkdir -p "${tmpdir}/newpack" "${tmpdir}/oldpack/DEBIAN"
+	dpkg-deb -x "${pkg}" "${tmpdir}/oldpack/"
+	dpkg-deb -e "${pkg}" "${tmpdir}/oldpack/DEBIAN"
+	sed -i '/Depends:/d' "${tmpdir}/oldpack/DEBIAN/control"
+	dpkg-deb -Z xz -b "${tmpdir}/oldpack/" "${tmpdir}/newpack/"
+	mv "${tmpdir}/newpack/$(basename "${pkg}")" "${PACKAGE_ROOT}"
+}
+
 pushd "$(dirname "$0")" > /dev/null 2>&1
 SCRIPTPATH="$(pwd)"
 popd > /dev/null 2>&1
@@ -77,6 +88,28 @@ pushd "$DEBIAN_ROOT" &> /dev/null
 	log "Building..."
 	if dpkg-buildpackage -uc -us; then
 		log "deb package generated."
+		if [ "${MODULES_ONLY}" = "true" ]; then
+			if sudo dpkg -i "${PACKAGE_ROOT}/${NAME}_${VERSION}"*.deb; then
+				entries=$(dkms status "${NAME}")
+				echo "entries: $entries"
+				IFS=$'\n'
+				for line in $entries; do
+					line=${line%:*}
+					kv=$(echo "$line" | tr -d "\n" | awk -F', ' '{print $3}')
+					arch=$(echo "$line" | tr -d "\n" | awk -F', ' '{print $4}')
+					if [ -n "$kv" ]; then
+						echo "Building for $NAME $VERSION $kv"
+						sudo dkms mkbmdeb -m "${NAME}" -v "${VERSION}" -k "${kv}" -a "${arch}"
+					fi
+				done
+				# Remove linux-image-$(uname -r) dependency as Raspbian does not install them
+				for pkg in /var/lib/dkms/"${NAME}"/"${VERSION}"/bmdeb/*.deb; do
+					remove_dependencies "${pkg}"
+				done
+			else
+				log ERROR "Failed to generate module-only packages."
+			fi
+		fi
 	else
 		log ERROR "Failed to generate deb package."
 	fi
