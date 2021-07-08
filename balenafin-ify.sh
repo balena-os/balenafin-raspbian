@@ -73,13 +73,7 @@ log "Installing required packages..."
 apt-get -y update
 apt-get -y install apt-transport-https
 apt-get -y full-upgrade
-apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl-firmware
-for fl in /usr/src/linux-headers-*; do
-	lh=$(basename "${fl}")
-	kv="${lh#"linux-headers-"}"
-	apt-get -y install sd8887-mrvl-modules-"${kv}"
-	depmod -a "${kv}"
-done
+apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-nxp
 
 log "Done. Enjoy your balenaFin board!"
 if [ "$REBOOT" -eq 1 ]; then
