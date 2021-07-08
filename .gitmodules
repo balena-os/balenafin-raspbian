@@ -1,3 +1,6 @@
 [submodule "debs/balenafin-firmware/src"]
 	path = debs/balenafin-firmware/src
 	url = https://github.com/balena-io/balena-fin.git
+[submodule "debs/sd8887-nxp/src"]
+	path = debs/sd8887-nxp/src
+	url = https://github.com/balena-io-hardware/balena-fin.git
