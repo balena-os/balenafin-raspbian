@@ -14,8 +14,6 @@ The packages supported are structured as subdirectories in `debs`. In order to g
 
 For example, running `./gen-deb-container.sh --package FOO`, will generate the deb package (and additional artefacts) in `debs/FOO/`.
 
-For packaging modules-only kernel drivers, run `./gen-deb-container.sh --package FOO -m`. This will create a binary package with the \*.ko modules and no source.
-
 ## Upload to bintray
 
 In order to upload a deb file to `bintray` use `upload-to-bintray.sh`. This requires an API key passed to the tool.
