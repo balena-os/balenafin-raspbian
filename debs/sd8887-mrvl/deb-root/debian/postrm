@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ -f /boot/config-"$(uname -r)" ]; then
-	content=$(cat /boot/config-"$(uname -r)")
-	if [ "${content}" = "# Delete me" ]; then
-		rm -f /boot/config-"$(uname -r)"
-	fi
-fi

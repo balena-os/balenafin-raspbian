@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Withouth these dkms thinks it's running on chroot and skips running kernel
-if [ ! -f /boot/config-"$(uname -r)" ]; then
-	grep docker /proc/1/cgroup > /dev/null 2>&1 || echo "# Delete me" > /boot/config-"$(uname -r)"
-fi
