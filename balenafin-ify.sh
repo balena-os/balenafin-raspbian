@@ -63,23 +63,16 @@ if [[ $EUID -ne 0 ]]; then
 	log ERROR "This script must be run as root"
 fi
 
-log "Importing bintray gpg key..."
-curl -fsSL 'https://bintray.com/user/downloadSubjectPublicKey?username=bintray' | apt-key add -
+curl -1sLf 'https://dl.cloudsmith.io/public/balena/raspbian/gpg.B7FAEF712E16C847.key' | apt-key add
 
 log "Adding balenaFin Raspbian repository..."
-echo "deb https://dl.bintray.com/balenaos/raspbian ${DISTRO} main" > /etc/apt/sources.list.d/balenafin.list
+echo "deb https://dl.cloudsmith.io/public/balena/raspbian/deb/raspbian ${DISTRO} main" > /etc/apt/sources.list.d/balenafin.list
 
 log "Installing required packages..."
 apt-get -y update
 apt-get -y install apt-transport-https
 apt-get -y full-upgrade
-apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-mrvl-firmware
-for fl in /usr/src/linux-headers-*; do
-	lh=$(basename "${fl}")
-	kv="${lh#"linux-headers-"}"
-	apt-get -y install sd8887-mrvl-modules-"${kv}"
-	depmod -a "${kv}"
-done
+apt-get -y install balenafin-firmware raspberrypi-kernel-headers sd8887-nxp
 
 log "Done. Enjoy your balenaFin board!"
 if [ "$REBOOT" -eq 1 ]; then

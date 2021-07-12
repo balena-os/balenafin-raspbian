@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: sd8887-mrvl
-Source: https://www.marvell.com
+Upstream-Name: sd8887-nxp
+Source: https://www.nxp.com
 
 Files: *
-Copyright: 2003-2018 Marvell International Ltd.
+Copyright: Copyright 2014-2020 NXP
 License: GPL-2+
 
 Files: debian/*

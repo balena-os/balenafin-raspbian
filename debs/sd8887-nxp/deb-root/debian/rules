@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE = 1
+
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@ --with dkms
+
+override_dh_dkms:
+	dh_dkms -V $(DEB_VERSION_UPSTREAM)
+
+override_dh_install:
+	# Install driver sources
+	#
+	dh_install ../src/software/drivers/sd8887/src/wlan/* usr/src/sd8887-nxp-$(DEB_VERSION_UPSTREAM)/wlan/
+	dh_install ../src/software/drivers/sd8887/src/bluetooth/* usr/src/sd8887-nxp-$(DEB_VERSION_UPSTREAM)/bluetooth/
+	
+	# Blacklist intree drivers
+	dh_install debian/sd8887-nxp-blacklist.conf /etc/modprobe.d/
+	dh_install debian/sd8xxx.conf /etc/modprobe.d/
+	
+	# Install BT firmware
+	dh_install software/drivers/sd8887/firmware/sd8887_uapsta_a2.bin /lib/firmware/nxp/
+
+# 
+override_dh_auto_configure override_dh_auto_build override_dh_auto_test override_dh_auto_install override_dh_auto_clean:

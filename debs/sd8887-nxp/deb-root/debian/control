@@ -1,0 +1,15 @@
+Source: sd8887-nxp
+Section: kernel
+Priority: extra
+Maintainer: Alex Gonzalez <alexg@balena.io>
+Build-Depends: debhelper (>= 10), dkms
+Standards-Version: 4.4.1
+Homepage: https://www.nxp.com
+Vcs-Browser: https://github.com/balena-io-hardware/balena-fin
+Vcs-Git: https://github.com/balena-io-hardware/balena-fin.git
+
+Package: sd8887-nxp
+Architecture: all
+Depends: ${misc:Depends}, bc
+Description: NXP SD8887 drivers and firmware
+ NXP SD8887 drivers and firmware
